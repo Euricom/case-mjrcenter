@@ -1,0 +1,15 @@
+{
+  "extends": "airbnb-base",
+  "globals": {},
+  "env": {
+    "browser": false,
+    "node": true
+  },
+  "rules": {
+    "import/no-extraneous-dependencies": [2, { "devDependencies": true }],
+    "semi": [2, "never"],       // no semicolon
+    "consistent-return": [0],
+    "array-callback-return": [0],
+    "no-underscore-dangle": [0]
+  }
+}

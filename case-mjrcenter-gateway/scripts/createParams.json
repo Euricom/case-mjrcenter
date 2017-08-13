@@ -1,0 +1,7 @@
+{
+    "newStorageAccountName": { "value": "mjrvmstorage" },
+    "adminUsername": { "value": "msdn" },
+    "adminPassword": { "value": "Sp@rt@cus" },
+    "dnsNameForPublicIP": { "value": "mjr-center" },
+    "ubuntuOSVersion": { "value": "16.04.0-LTS" }
+}

@@ -1,0 +1,11 @@
+compile:
+  override:
+    - git status -b
+test:
+  override:
+    - git log -1
+deployment:
+  production:
+    branch: master
+    commands:
+      - ssh msdn@mjr-center.westeurope.cloudapp.azure.com 'bash -s' < ./scripts/deploy.sh

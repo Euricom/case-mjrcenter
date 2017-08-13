@@ -1,0 +1,9 @@
+# Auto-detect file mode (text or binary)
+* text=auto
+
+# Following file extensions are always text
+*.cs text
+*.sln text
+*.xml text
+*.json text
+

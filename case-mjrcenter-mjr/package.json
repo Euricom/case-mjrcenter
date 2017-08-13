@@ -1,0 +1,33 @@
+{
+  "name": "case-mjrcenter-mjr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel ./server -d ./build --ignore node_modules",
+    "serve": "cross-env NODE_ENV=development PORT=3000 nodemon server/server",
+    "start": "cross-env NODE_ENV=production PORT=3000 node server"
+  },
+  "dependencies": {
+    
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.21.0",
+    "babel-preset-latest": "^6.16.0",
+    "babel-preset-stage-2": "^6.18.0",
+    "eslint": "^3.14.1",
+    "eslint-config-airbnb-base": "^11.0.1",
+    "eslint-plugin-import": "^2.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Euricom/case-mjrcenter-mjr.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Euricom/case-mjrcenter-mjr/issues"
+  },
+  "homepage": "https://github.com/Euricom/case-mjrcenter-mjr#readme"
+}

@@ -1,0 +1,78 @@
+version: "2"
+services:
+  app:
+    image: euri/case-mjrcenter-app
+    environment:
+      SERVICE_NAME: app
+
+  mjr:
+    image: euri/case-mjrcenter-mjr
+    environment:      
+      SERVICE_NAME: mjr
+      PORT: 80
+      NODE_ENV: production
+      AZURE_STORAGE_ACCESS_KEY: ${MJR_AZURE_STORAGE_ACCESS_KEY}
+      SENTRY_URL: ${MJR_SENTRY_URL}
+      LOGENTRIES_TOKEN: ${MJR_LOGENTRIES_TOKEN}
+      MONGODB: ${MJR_MONGODB}
+
+  # authentication:
+  #   image: euri/case-mjrcenter-authentication
+  #   environment:
+  #     SERVICE_NAME: authentication
+  #     IDS_CONNECTIONSTRINGS_IDENTITYSERVER: ${AUTHENTICATION_SQL_CONNECTIONSTRING}
+
+  schedule:
+    image: euri/case-mjrcenter-schedule
+    environment:
+      SERVICE_NAME: schedule
+      AZURE_STORAGE_ACCESS_KEY: ${MJR_AZURE_STORAGE_ACCESS_KEY}
+      MJR_SCHEDULE_SQL_CONNECTIONSTRING: ${MJR_SCHEDULE_SQL_CONNECTIONSTRING}
+      MJR_SCHEDULE_MJRSERVICE_API: ${MJR_SCHEDULE_MJRSERVICE_API}
+      MJR_SCHEDULE_LOGENTRIES_TOKEN: ${MJR_SCHEDULE_LOGENTRIES_TOKEN}
+      MJR_SCHEDULE_LOGENTRIES_DEBUG: ${MJR_SCHEDULE_LOGENTRIES_DEBUG}
+      MJR_SCHEDULE_LOGENTRIES_INCLUDESCOPES: ${MJR_SCHEDULE_LOGENTRIES_INCLUDESCOPES}
+      MJR_SCHEDULE_LOGENTRIES_IMMEDIATE_FLUSH: ${MJR_SCHEDULE_LOGENTRIES_IMMEDIATE_FLUSH}
+      MJR_SCHEDULE_LOGENTRIES_LOGLEVEL: ${MJR_SCHEDULE_LOGENTRIES_LOGLEVEL}
+    links:
+      - mjr
+
+  # registration:
+  #   image: euri/case-mjrcenter-registration
+  #   environment:
+  #     SERVICE_NAME: registration
+  #     REG_CONNECTIONSTRINGS_REGISTRATIONS: ${REGISTRATION_SQL_CONNECTIONSTRING}
+
+  # voucher:
+  #   image: euri/case-mjrcenter-voucher
+  #   environment:
+  #     SERVICE_NAME: voucher
+  #     VCH_CONNECTIONSTRINGS_VOUCHER: ${VOUCHER_SQL_CONNECTIONSTRING}
+
+  # payment:
+  #   image: euri/case-mjrcenter-payment
+  #   environment:
+  #     SERVICE_NAME: payment
+
+  gateway:
+    build:
+      context: ./gateway
+    links:
+      - app
+      - mjr
+      # - authentication
+      - schedule
+      # registration
+      # voucher
+      # - payment
+    depends_on:
+      - app
+      - mjr
+      # - authentication
+      - schedule
+      # registration
+      # voucher
+      # - payment
+    ports:
+      - "80:80"
+      - "443:443"
